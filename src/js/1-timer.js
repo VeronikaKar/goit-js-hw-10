@@ -12,7 +12,29 @@ import "izitoast/dist/css/iziToast.min.css";
 //     title: 'Hey',
 //     message: 'What would you like to add?'
 // });
-const input = document.querySelector('#datetime-picker');
+// iziToast.success({
+//     title: 'OK',
+//     message: 'Successfully inserted record!',
+// });
+
+
+// iziToast.error({
+//     title: 'Error',
+//     message: 'Illegal operation',
+// });
+// setTimeout(() => {
+    // Change value of isSuccess variable to simulate request status
+//     const isSuccess = true;
+
+//     if (isSuccess) {
+//       onSuccess("success value");
+//     } else {
+//       onError("error");
+//     }
+//   }, 2000);
+// };
+
+// const input = document.querySelector('#datetime-picker');
 const startBtn = document.querySelector('button[data-start]');
 const daysRef = document.querySelector('span[data-days]');
 const hoursRef = document.querySelector('span[data-hours]');
@@ -46,13 +68,22 @@ const options = {
       iziToast.show(iziOptions);
       startBtn.disabled = true;
       // return alert('Please choose a date in the future');
+      // iziToast.error({
+      //   title: '',
+      //   message: 'Please choose a date in the future',
+      // });
     } else {
       startBtn.disabled = false;
       userSelectedDate = selectedDates[0];
+//         iziToast.success({
+//     title: '',
+//     message: '',
+// });
     }
     return;
   },
 };
+
 
 startBtn.addEventListener('click', () => {
   const intervalId = setInterval(() => {
