@@ -1,0 +1,89 @@
+/* Snackbar */
+.label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 16px;
+  width: 360px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  color: #2e2f42;
+}
+.input {
+  height: 40px;
+  border: 1px solid #808080;
+}
+.input:hover {
+  border: 1px solid #2e2f42;
+}
+.input:checked {
+  border: 1px solid #4e75ff;
+}
+.fieldset {
+  padding: 0 0 0 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 48px;
+  width: 334px;
+  height: 64px;
+  border-radius: 4px;
+  stroke-width: 1px;
+  stroke: #808080;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  color: #2e2f42;
+  margin-bottom: 24px;
+  border: 1px solid #808080;
+}
+.fieldset:hover {
+  border: 1px solid #2e2f42;
+}
+
+.fieldset:checked {
+  border: 1px solid #757575;
+}
+
+[name='state'] {
+  border: 1px solid #757575;
+  border-radius: 14px;
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  margin-bottom: 8px;
+}
+
+.fieldset-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 10px;
+  border-radius: 8px;
+  padding: 8px 16px;
+  width: 360px;
+  height: 40px;
+  background: #4e75ff;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  color: #fff;
+  border: none;
+}
+
+.form-btn:hover {
+  background: #6c8cff;
+}

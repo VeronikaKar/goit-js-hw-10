@@ -34,29 +34,38 @@ import "izitoast/dist/css/iziToast.min.css";
 //   }, 2000);
 // };
 
-// const input = document.querySelector('#datetime-picker');
-const startBtn = document.querySelector('button[data-start]');
+const inputRef = document.querySelector('#datetime-picker');
+const startBtnRef = document.querySelector('button[data-start]');
 const daysRef = document.querySelector('span[data-days]');
 const hoursRef = document.querySelector('span[data-hours]');
 const minutesRef = document.querySelector('span[data-minutes]');
 const secondsRef = document.querySelector('span[data-seconds]');
-
-let userSelectedDate;
-const iziOptions = {
-  title: 'ERROR',
-  titleColor: 'red',
-  titleSize: '24px',
-  message: 'Please choose a date in the future',
-  messageSize: '16px',
-  backgroundColor: 'rgba(225, 0, 0, 0.3)',
-  position: 'center',
-  closeOnEscape: true,
-  timeout: 3000,
-  overlay: true,
-  overlayClose: true,
-};
-
-startBtn.disabled = true;
+import errorIcon from "../img/bi_x-octagon.svg"
+import successIcon from "../img/genetic-data-svgrepo-com.svg"
+let userSelectedDate = 0;
+// const iziOptions = {
+//   title: 'ERROR',
+//   titleColor: 'red',
+//   titleSize: '24px',
+//   message: 'Please choose a date in the future',
+//   messageSize: '16px',
+//   backgroundColor: 'rgba(225, 0, 0, 0.3)',
+// 
+// };
+function showMessage(icon, message, bgr) {
+  iziToast.show({
+    iconUrl:icon,
+    titleColor: 'White',
+    titleSize: '24px',
+    message,
+    messageColor: 'White',
+    messageSize: '16px',
+    backgroundColor: bgr,
+    position: 'topRight',
+    timeout: 3000,
+});
+}
+startBtnRef.disabled = true;
 const options = {
   enableTime: true,
   time_24hr: true,
@@ -65,38 +74,48 @@ const options = {
   onClose(selectedDates) {
     console.log(selectedDates[0]);
     if (selectedDates[0] < new Date()) {
-      iziToast.show(iziOptions);
-      startBtn.disabled = true;
+    
+      startBtnRef.disabled = true;
       // return alert('Please choose a date in the future');
-      // iziToast.error({
-      //   title: '',
+      // return iziToast.error({
+      //   title: 'Error',
       //   message: 'Please choose a date in the future',
+      //   position: 'topRight',
+      //   color: 'red',
       // });
+      showMessage(errorIcon,'Please choose a date in the future','#ef4040')
     } else {
-      startBtn.disabled = false;
+      startBtnRef.disabled = false;
       userSelectedDate = selectedDates[0];
-//         iziToast.success({
-//     title: '',
-//     message: '',
-// });
+      //         iziToast.success({
+      //     title: '',
+      //     message: '',
+      // });
     }
-    return;
-  },
-};
+  }
+}
+
+flatpickr(inputRef, options)
+// If using flatpickr in a framework, its recommended to pass the element directly
+// flatpickr(element, {});
 
 
-startBtn.addEventListener('click', () => {
+startBtnRef.addEventListener('click', () => {
   const intervalId = setInterval(() => {
     const currentTime = Date.now();
     const diffInTime = userSelectedDate - currentTime;
     const { days, hours, minutes, seconds }  = convertMs(diffInTime);
-    minutesRef.textContent = minutes.addLeadingZero(timeZone+ hours);
-    daysRef.textContent = days.addLeadingZero(timeZone + hours);
-    hoursRef.textContent = hours.addLeadingZero(timeZone + hours);
-    secondsRef.textContent = seconds.addLeadingZero(timeZone + hours);
-      inputRef.disabled = true;
-    startBtn.disabled = true;
-     if (diffInTime < 1000) clearInterval(intervalId);
+    
+    daysRef.textContent = addLeadingZero(days);
+    hoursRef.textContent = addLeadingZero(hours);
+    minutesRef.textContent = addLeadingZero(minutes);
+    secondsRef.textContent = addLeadingZero(seconds);
+    inputRef.disabled = true;
+    startBtnRef.disabled = true;
+    if (diffInTime < 1000) {
+      clearInterval(intervalId);
+      showMessage(successIcon, 'Congratulations', 'Grey')
+    }
   }, 1000);
 });
 
